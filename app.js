@@ -3,9 +3,12 @@ ui = new UI();
 ls = new LS();
 
 // event elements
+// form submit event
 const form = document.querySelector('form');
 const taskInput = document.querySelector('#task');
-
+// taskList x click event
+const taskList = document.querySelector("ul");
+taskList.addEventListener("click", deleteTask);
 //events
 // form submit event
 form.addEventListener('submit', addTask);
@@ -18,4 +21,11 @@ function addTask(e) {
 	// add task value to the LS by LS object
 	ls.addTask(task);
 	e.preventDefault();
+}
+
+function deleteTask(e) {
+	// get task name
+	let task = e.target.parentElement.firstChild;
+	// delete task value from visual by UI object
+	ui.deleteTask(task);
 }
