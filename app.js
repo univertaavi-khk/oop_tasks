@@ -5,13 +5,15 @@ ls = new LS();
 // event elements
 // form submit event
 const form = document.querySelector('form');
+form.addEventListener('submit', addTask);
 const taskInput = document.querySelector('#task');
 // taskList x click event
 const taskList = document.querySelector("ul");
 taskList.addEventListener("click", deleteTask);
-//events
-// form submit event
-form.addEventListener('submit', addTask);
+// clear button event
+const clearBtn = document.querySelector("#clear-tasks");
+clearBtn.addEventListener("click", deleteTasks);
+
 
 function addTask(e) {
 	// create a new object Task with input value
@@ -32,4 +34,11 @@ function deleteTask(e) {
 	task = task.textContent;
 	// delete task value from LS by LS object
 	ls.deleteTask(task);
+}
+function deleteTasks(e) {
+	// delete all tasks from UI
+	let tasks = document.querySelector("ul");
+	ui.deleteTasks(tasks);
+	// delete tasks from LS
+	ls.deleteTasks();
 }
