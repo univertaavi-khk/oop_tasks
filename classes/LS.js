@@ -17,26 +17,22 @@ class LS {
 	// add task to LS
 	addTask(task){
 		// set data to the LS
-		let tasks;
-		if(localStorage.getItem("tasks") === null){
-			tasks = [];
-		} else {
-			tasks = JSON.parse(localStorage.getItem("tasks"));
-		}
+		let tasks = this.getData("tasks");
 		tasks.push(task);
-		localStorage.setItem("tasks", JSON.stringify(tasks));
+		this.setData("tasks", tasks);
 		// log to console that task is added to LS
 		task.addedToLS();
 	}
-	// SIIN JÄI MIDAGI POOLELI!!!!
-	deleteTask(e){
+	// delete task from LS
+	deleteTask(task) {
 		// get task name
-		let task = e.target.parentElement.firstChild;
+		let tasks = this.getData("tasks");
 		// delete task value from visual by UI object
-		ui.deleteTask(task);
-		// change task element content before deleting from LS
-		task = task.textContent;
-		// delete task value from LS by LS object
-		ls.deleteTask(task);
+		tasks.forEach(function(tasksElement, tasksIndex) {
+			if(tasksElement.name === task) {
+				tasks.splice(tasksIndex, 1);
+			}
+		});
+		this.setData("tasks", tasks);
 	}
 }

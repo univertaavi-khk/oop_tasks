@@ -28,4 +28,8 @@ function deleteTask(e) {
 	let task = e.target.parentElement.firstChild;
 	// delete task value from visual by UI object
 	ui.deleteTask(task);
+	// change task element content before deleting from LS
+	task = task.textContent;
+	// delete task value from LS by LS object
+	ls.deleteTask(task);
 }
